@@ -8,7 +8,9 @@ This is a cool minigolf game for MS-DOS from 1995 (Pixel Painters Corporation). 
 At the moment, only some utils were coded:
   - player.c: Plays original loudness tracker music (.DAT) in MS-DOS, and converts patterns, notes and most instrument parameters to impulse tracker (converted .it files require some tweaking and pcm samples, fixed and optimized .it conversions will be added).
   - ppext.c: Pixel painters extractor, extracts files from .RES resources.
-  - convert.c: Converts.SPF and .ANI to .GIF. 
+  - convert.c: Converts.SPF and .ANI to .GIF.
+  - readfile.c: Extracts ANI/SPF from RES and converts to GIF (readfile FILE.RES IMAGE.ANI).
+  - readres.c: For MS-DOS, it extracts ANI/SPF from RES and displays the animation using VGA mode 13h (readres FILE.RES IMAGE.ANI).
 
 FILE TYPES
 ----------
