@@ -35,6 +35,6 @@ Then, the rest of elements are drawn in this order (probably):
   - Animated blue stars: Using the first 32 colors, they are drwan only on top of plane 0 pixels.
   - Animated foreground: Partial ANI frames which update parts of plane 1.
   - Background ships: Only ONE ship is pressent at any time, it replaces plane 0 pixels, plane 1 pixels are not modifyed, so the ship is "behind" plane 1. They probably restore plane 0 before being drawn in the next frame.
-  - Ball: It is drawn on top of both planes, but courses have pixel masks (in SPF files), which define where the ball is drawn and where it is not.
-  - Mouse cursor: It is drawn on top of everything
+  - Ball: It is drawn on top of both planes when moving, but courses have pixel masks (in SPF files), which define where the ball is drawn and where it is not. Once the ball stops, it becomes a static part of plane 1, and it is not updated.
+  - Mouse cursor: It is drawn on top of everything if the ball is not moving. When the ball moves, cursor is not drawn. It probably restores plane 0 and plane 1 before being drawn in the next frame. Also can display text info, or generate a line when ball is clicked, both the text info and the line, are drawn on top of everything, including the cursor.
 
