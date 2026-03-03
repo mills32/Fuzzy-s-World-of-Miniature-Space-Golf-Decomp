@@ -38,3 +38,11 @@ Then, the rest of elements are drawn in this order (probably):
   - Ball: It is drawn on top of both planes when moving, but courses have pixel masks (in SPF files), which define where the ball is drawn and where it is not. Once the ball stops, it becomes a static part of plane 1, and it is not updated.
   - Mouse cursor: It is drawn on top of everything if the ball is not moving. When the ball moves, cursor is not drawn. It probably restores plane 0 and plane 1 before being drawn in the next frame. Also can display text info, or generate a line when ball is clicked, both the text info and the line, are drawn on top of everything, including the cursor.
 
+NEXT STEPS
+----------
+  - Test if a 286 can handle animations.
+  - Get animation and game frame rate.
+  - Recreate starfield generator for pixel painters logo.
+  - Recreate blue stars animations.
+  - Recreate random ships movement.
+  - Find game logic loop (ball physics, mouse input).  
