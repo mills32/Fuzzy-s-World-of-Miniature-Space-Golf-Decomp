@@ -11,7 +11,7 @@ int main(int argc, char *argv[]){
     unsigned long length;
     unsigned char byte;
     int x, y;
-    unsigned char read_buffer[128*1024];
+    unsigned char read_buffer[256*1024];
     printf("Pixel Painters Games Extracter by Frenkel Smeijers\n");
 
     if (argc < 2) {
@@ -21,28 +21,25 @@ int main(int argc, char *argv[]){
     }
 
     in = fopen(argv[1], "rb");
-    if (!in) {
-        printf("Can't find %s\n", argv[1]);
-        return 1;
-    }
+    if (!in) {printf("Can't find %s\n", argv[1]);return 1;}
 
-    /* Read number of files */
+    // Read number of files
     fread(&nroffiles, 2, 1, in);
-
+    //Extract files
     for (x = 0; x < nroffiles; x++) {
-        /* Read filename (12 bytes) */
+        // Read filename (12 bytes)
         fseek(in, (x * 22) + 3, SEEK_SET);
         fread(filename, 1, 12, in);
         filename[12] = '\0';
 
-        /* Strip zero padding */
+        // Strip zero padding
         for (y = 0; y < 12; y++) {
             if (filename[y] == 0) break;
             cleanname[y] = filename[y];
         }
         cleanname[y] = '\0';
 
-        /* Read offset and length */
+        // Read offset and length
         fread(&offset, 4, 1, in);
         fread(&length, 4, 1, in);
 
