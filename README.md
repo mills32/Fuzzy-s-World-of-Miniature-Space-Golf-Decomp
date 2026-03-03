@@ -14,7 +14,7 @@ FILE TYPES
 These are the files contained in the game:
   - ANI: Animation files for background, they contain a 256 color palette, 3 bytes per color (but using 6 bit VGA colors), a first frame with a complete background image, and after that, a sequence of partial images, containing only animated parts. These partial images are uncompressed in real time (I think), most of them are very small and fast to process. All images are ment to be 320x200 pixels.
   - SPF: Static background images and sprite sheets, the same as ANI, but only contain the first 320x200 image.
-  - DAT: Music in LOUDNESS tracker format, it it very similar to impulse tracker, but only contains YM3812/OPL2/Adlib instruments.
+  - DAT: Music in LOUDNESS tracker format, it is very similar to impulse tracker, but only contains YM3812/OPL2/Adlib instruments.
   - SMP: SFX sounds, just 8 Bit, 11025Hz PCM.
   - TXT: Text data (menus, instructions...).
 
