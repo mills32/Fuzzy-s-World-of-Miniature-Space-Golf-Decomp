@@ -16,7 +16,7 @@ FILE TYPES
 ----------
 
 These are the files contained in the game:
-  - ANI: Animation files for background, they contain a 256 color palette, 3 bytes per color (but using 6 bit VGA colors), a first frame with a complete background image, and after that, a sequence of partial images, containing only animated parts. These partial images are uncompressed in real time (I think), most of them are very small and fast to process. All images are ment to be 320x200 pixels.
+  - ANI: Animation files for background, they contain a 256 color palette, 3 bytes per color (but using 6 bit VGA colors), a first frame with a complete background image, and after that, a sequence of partial images, containing only animated parts. These partial images are uncompressed in real time (confirmed), most of them are very small, contain a lot of skip commands and processing them is fast. All images are ment to be 320x200 pixels.
   - SPF: Static background images, sprite sheets and masks (for menu interactions and ball drawing), the same as ANI, but only contain the first 320x200 image. 
   - DAT: Music in LOUDNESS tracker format, it is very similar to impulse tracker, but only contains YM3812/OPL2/Adlib instruments.
   - SMP: SFX sounds, just 8 Bit, 11025Hz PCM.
@@ -28,7 +28,7 @@ HOW DOES THE GAME DRAW STUFF
 
 Drawing functions are optimized for VGA mode 13h, 320x200, 256 colors. The game draws everything on a RAM buffer, and then it pastes that to the 64K VRAM of mode 13h very fast (using MOVSD instruction) when the VGA is in vertical retrace mode or VSYNC.
 
-The game first decompresses a complete 320x240 image (a logo, a background...) out of the rendering loop (I think).
+The game first decompresses a complete 320x240 image (a logo, a background...) out of the rendering loop.
 This background image is divided in two planes using the palette:
   - Colors 0-31: Plane 0.
   - Colors 32-255: Plane 1.
@@ -42,8 +42,8 @@ Then, the rest of elements are drawn in this order (probably):
 
 NEXT STEPS
 ----------
-  - Test if a 286 can handle animations.
-  - Get animation and game frame rate.
+  - Test if a 286 can handle the animations? => YES! (needs original ASM decoder, a bit slow in C).
+  - Get animation speed and game frame rate.
   - Recreate starfield generator for pixel painters logo.
   - Recreate blue stars animations.
   - Recreate random ships movement.
