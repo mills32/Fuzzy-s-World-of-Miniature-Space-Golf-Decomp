@@ -3,6 +3,8 @@ Fuzzy's World of Miniature Space Golf Decomp (in progress)
 
 This is a cool minigolf game for MS-DOS from 1995 (Pixel Painters Corporation). It requires a 386 and 4MB of RAM, but I plan to recompile for real mode 8088/8086 and 640 KB RAM, (it will probably need a 12 MHz 286 to work OK). Also I'll love to create an SDL/OpenGL port.
 
+![screenshot](MENU03A.GIF)
+
 At the moment, only some utils were coded:
   - player.c: Plays original loudness tracker music (.DAT) in MS-DOS, and converts patterns, notes and most instrument parameters to impulse tracker (converted .it files require some tweaking and pcm samples, fixed and optimized .it conversions will be added).
   - ppext.c: Pixel painters extractor, extracts files from .RES resources.
@@ -13,9 +15,26 @@ FILE TYPES
 
 These are the files contained in the game:
   - ANI: Animation files for background, they contain a 256 color palette, 3 bytes per color (but using 6 bit VGA colors), a first frame with a complete background image, and after that, a sequence of partial images, containing only animated parts. These partial images are uncompressed in real time (I think), most of them are very small and fast to process. All images are ment to be 320x200 pixels.
-  - SPF: Static background images and sprite sheets, the same as ANI, but only contain the first 320x200 image.
+  - SPF: Static background images, sprite sheets and masks (for menu interactions and ball drawing), the same as ANI, but only contain the first 320x200 image. 
   - DAT: Music in LOUDNESS tracker format, it is very similar to impulse tracker, but only contains YM3812/OPL2/Adlib instruments.
   - SMP: SFX sounds, just 8 Bit, 11025Hz PCM.
   - TXT: Text data (menus, instructions...).
 
-![screenshot](MENU03A.GIF)
+
+HOW DOES THE GAME DRAW STUFF
+----------------------------
+
+Drawing functions are optimized for VGA mode 13h, 320x200, 256 colors. The game draws everything on a RAM buffer, and then it pastes that to the 64K VRAM of mode 13h very fast (using MOVSD instruction) when the VGA is in Vertical retrace mode or VSYNC.
+
+The game first decompressed a complete 320x240 image (a logo, a background...) out of the rendering loop.
+This background image is divided in two planes using the palette:
+  - Colors 0-31: Plane 0.
+  - Colors 32-255: Plane 1.
+
+Then, the rest of elements are drawn in this order (probably):
+  - Animated blue stars: Using the first 32 colors, they are drwan only on top of plane 0 pixels.
+  - Animated foreground: Partial ANI frames which update parts of plane 1.
+  - Background ships: Only ONE ship is pressent at any time, it replaces plane 0 pixels, plane 1 pixels are not modifyed, so the ship is "behind" plane 1. They probably restore plane 0 before being drawn in the next frame.
+  - Ball: It is drawn on top of both planes, but courses have pixel masks (in SPF files), which define where the ball is drawn and where it is not.
+  - Mouse cursor: It is drawn on top of everything
+
