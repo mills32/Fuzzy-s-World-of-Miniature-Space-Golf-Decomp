@@ -24,7 +24,7 @@ These are the files contained in the game:
 HOW DOES THE GAME DRAW STUFF
 ----------------------------
 
-Drawing functions are optimized for VGA mode 13h, 320x200, 256 colors. The game draws everything on a RAM buffer, and then it pastes that to the 64K VRAM of mode 13h very fast (using MOVSD instruction) when the VGA is in Vertical retrace mode or VSYNC.
+Drawing functions are optimized for VGA mode 13h, 320x200, 256 colors. The game draws everything on a RAM buffer, and then it pastes that to the 64K VRAM of mode 13h very fast (using MOVSD instruction) when the VGA is in vertical retrace mode or VSYNC.
 
 The game first decompresses a complete 320x240 image (a logo, a background...) out of the rendering loop (I think).
 This background image is divided in two planes using the palette:
