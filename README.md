@@ -17,7 +17,7 @@ FILE TYPES
 
 These are the files contained in the game:
   - ANI: Animation files for background, they contain a 256 color palette, 3 bytes per color (but using 6 bit VGA colors), a first frame with a complete background image, and after that, a sequence of partial images, containing only animated parts. These partial images are uncompressed in real time (confirmed), most of them are very small, contain a lot of skip commands and processing them is fast. All images are ment to be 320x200 pixels.
-  - SPF: Static background images, sprite sheets and masks (for menu interactions and ball drawing), the same as ANI, but only contain the first 320x200 image. 
+  - SPF: Static background images, sprite sheets, masks (for menu interactions and ball drawing), and MAPS (color maps for the physics). They use the same structure same as ANI, but only contain the first 320x200 image. 
   - DAT: Music in LOUDNESS tracker format, it is very similar to impulse tracker, but only contains YM3812/OPL2/Adlib instruments.
   - SMP: SFX sounds, just 8 Bit, 11025Hz PCM.
   - TXT: Text data (menus, instructions...).
@@ -36,9 +36,9 @@ This background image is divided in two planes using the palette:
 Then, the rest of elements are drawn in this order (probably):
   - Animated blue stars: Using the first 32 colors, they are drwan only on top of plane 0 pixels.
   - Animated foreground: Partial ANI frames which update parts of plane 1.
-  - Background ships: Only ONE ship is pressent at any time, it replaces plane 0 pixels, plane 1 pixels are not modifyed, so the ship is "behind" plane 1. They probably restore plane 0 before being drawn in the next frame.
+  - Background ships: Only ONE ship is pressent at any time, it replaces plane 0 pixels, plane 1 pixels are not modifyed, so the ship is "behind" plane 1. They MUST restore plane 0 after image is copied to VRAM.
   - Ball: It is drawn on top of both planes when moving, but courses have pixel masks (in SPF files), which define where the ball is drawn and where it is not. Once the ball stops, it becomes a static part of plane 1, and it is not updated.
-  - Mouse cursor: It is drawn on top of everything if the ball is not moving. When the ball moves, cursor is not drawn. It probably restores plane 0 and plane 1 before being drawn in the next frame. Also can display text info, or generate a line when ball is clicked, both the text info and the line, are drawn on top of everything, including the cursor.
+  - Mouse cursor: It is drawn on top of everything if the ball is not moving. When the ball moves, cursor is not drawn. It MUST restore plane 0 and plane 1 after image is copied to VRAM. Also can display text info, or generate a line when ball is clicked, both the text info and the line, are drawn on top of everything, including the cursor.
 
 NEXT STEPS
 ----------
