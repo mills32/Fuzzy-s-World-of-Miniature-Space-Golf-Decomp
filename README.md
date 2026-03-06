@@ -3,7 +3,7 @@ Fuzzy's World of Miniature Space Golf Decomp (in progress)
 
 This is a cool minigolf game for MS-DOS from 1995 (Pixel Painters Corporation). It requires a 386 and 4MB of RAM, but I plan to recompile for real mode 8088/8086 and 640 KB RAM, (it will probably need a 12 MHz 286 to work OK). Also I'll love to create an SDL/OpenGL port.
 
-![screenshot](MENU03A.GIF)
+![screenshot](MENU03A.GIF) ![screenshot](INTRO09A.GIF)
 
 At the moment, only some utils were coded:
   - player.c: Plays original loudness tracker music (.DAT) in MS-DOS, and converts patterns, notes and most instrument parameters to impulse tracker (converted .it files require some tweaking and pcm samples, fixed and optimized .it conversions will be added).
