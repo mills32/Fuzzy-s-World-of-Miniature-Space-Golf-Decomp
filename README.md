@@ -1,7 +1,8 @@
 Fuzzy's World of Miniature Space Golf Decomp (in progress)
 ----------------------------------------------------------
 
-This is a cool minigolf game for MS-DOS from 1995 (Pixel Painters Corporation). It requires a 386 and 4MB of RAM, but I plan to recompile for real mode 8088/8086 and 640 KB RAM, (it will probably need a 12 MHz 286 to work OK). Also I'll love to create an SDL/OpenGL port.
+This is a cool minigolf game for MS-DOS from 1995 (Pixel Painters Corporation). It requires a 386 and 4MB of RAM, but I plan to recompile for real mode 8088/8086 and 640 KB RAM... EDIT: It really needs a 286 12MHz minimum, and it also needs some kind EMS/XMS/protected mode, because some levels have two or more huge animations. 
+Also I'll love to create an SDL/OpenGL port (this will be much easier).
 
 ![screenshot](MENU03A.GIF) ![screenshot](INTRO09A.GIF)
 
